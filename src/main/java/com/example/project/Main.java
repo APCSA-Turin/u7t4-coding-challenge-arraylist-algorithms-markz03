@@ -241,22 +241,22 @@ public class Main{
     // notAlone([3, 4], 3) → [4,4]
     public static ArrayList<Integer> notAlone(ArrayList<Integer> list, int val){
 
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) == val) {
-                if (i == 0) {
-                    list.set(i, list.get(i+1));
-                }
-                else if (i == list.size() - 1) {
-                    list.set(i, list.get(i-1));
-                }
-                else if (i != 0 && i != list.size()-1) {
-                    list.set(i, Math.max(list.get(i - 1), list.get(i+1)));
-                }
-            }
+        if (list.get(0) ==  val && list.get(1) > val) {
+            list.set(0, list.get(1));
+        }
+        if (list.get(list.size() - 1) ==  val && list.get(list.size() - 2) > val) {
+            list.set(list.size() - 1, list.get(list.size() - 2));
         }
 
 
+        for (int i = 1; i < list.size() - 1; i++) {
+            if (list.get(i) == val) {
+                list.set(i, Math.max(list.get(i - 1), list.get(i + 1)));
+            }
+        }
+
         return list;
+
     }
 
 
@@ -285,7 +285,7 @@ public class Main{
 
     public static ArrayList<Integer> fix34(ArrayList<Integer> list){
         int start = 0;
-        for (int i = 0; i < list.size() -1; i++) {
+        for (int i = 0; i < list.size() - 1; i++) {
             if (list.get(i) == 3) {
                 for (int j = start; j < list.size(); j++) {
                     if (list.get(j) == 4) {
